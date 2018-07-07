@@ -29,5 +29,6 @@ Thumbs.db
 
 # Terraform #
 #############
-./*.tfstate
+*.tfstate
+*.tfstate.backup
 .terraform/
