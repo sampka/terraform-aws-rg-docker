@@ -26,29 +26,30 @@ module "server" {
 
 ## Inputs
 
-| Name                    | Description                                                                      | Type   | Default                                                                     | Required                                                          |    |
-|-------------------------|----------------------------------------------------------------------------------|--------|-----------------------------------------------------------------------------|-------------------------------------------------------------------|----|
-| access_key              | The AWS access key                                                               | string | -                                                                           | yes                                                               |    |
-| ami                     | Amazon Linux AMI                                                                 | string | `ami-c7e0c82c`                                                              | no                                                                |    |
-| aws_region              | AWS region                                                                       | string | `eu-central-1`                                                              | no                                                                |    |
-| create_operator_user    | Whether to create an additional operator user                                    | string | `true`                                                                      | no                                                                |    |
-| docker_apt_cache_time   | Time to cache apt-cache in seconds                                               | string | `86400`                                                                     | no                                                                |    |
-| docker_apt_package_name | Full APT docker package name                                                     | string | `{{ docker_version }}~{{ docker_edition }}-0~{{ ansible_distribution        | lower }}`                                                         | no |
-| docker_channel          | Docker channel. Either 'edge' or 'stable'                                        | string | `stable`                                                                    | no                                                                |    |
-| docker_compose_version  | Docker Compose version to install                                                | string | `1.21.0`                                                                    | no                                                                |    |
-| docker_edition          | Docker edition. Either Community Edition 'ce' or Enterprise Edition 'ee'         | string | `ce`                                                                        | no                                                                |    |
-| docker_gpg_key          | Docker repository GPG key                                                        | string | `9DC858229FC7DD38854AE2D88D81803C0EBFCD88`                                  | no                                                                |    |
-| docker_instance_name    | Name of the instance                                                             | string | `docker-instance`                                                           | no                                                                |    |
-| docker_repository       | Docker repository path                                                           | string | `deb [arch=amd64] https://download.docker.com/linux/{{ ansible_distribution | lower }} {{ ansible_distribution_release }} {{ docker_channel }}` | no |
-| docker_version          | Docker version to install                                                        | string | `18.03.1`                                                                   | no                                                                |    |
-| instance_entrypoint     | Entrypoint script to execute                                                     | string | ``                                                                          | no                                                                |    |
-| instance_type           | Instance type                                                                    | string | `t2.medium`                                                                 | no                                                                |    |
-| key_name                | Name of the key to use. This key has to pre-exist in aws                         | string | -                                                                           | yes                                                               |    |
-| operator_group          | Group of the operator account                                                    | string | `operator`                                                                  | no                                                                |    |
-| operator_password       | Password of the operator account                                                 | string | -                                                                           | yes                                                               |    |
-| operator_user           | User name of the operator account                                                | string | `operator`                                                                  | no                                                                |    |
-| secret_key              | The AWS secret key                                                               | string | -                                                                           | yes                                                               |    |
-| security_groups         | List of additional security groups that should get attached to the EC2 instances | list   | `<list>`                                                                    | no                                                                |    |
+| Name                    | Description                                                                      | Type   | Default                                    | Required |
+|-------------------------|----------------------------------------------------------------------------------|--------|--------------------------------------------|----------|
+| access_key              | The AWS access key                                                               | string | -                                          | yes      |
+| ami                     | Amazon Linux AMI                                                                 | string | `ami-c7e0c82c`                             | no       |
+| aws_region              | AWS region                                                                       | string | `eu-central-1`                             | no       |
+| create_operator_user    | Whether to create an additional operator user                                    | string | `true`                                     | no       |
+| docker_apt_cache_time   | Time to cache apt-cache in seconds                                               | string | `86400`                                    | no       |
+| docker_apt_package_name | Full APT docker package name                                                     | string | `[docker package name]`                    | no       |
+| docker_channel          | Docker channel. Either 'edge' or 'stable'                                        | string | `stable`                                   | no       |
+| docker_compose_version  | Docker Compose version to install                                                | string | `1.21.0`                                   | no       |
+| docker_edition          | Docker edition. Either Community Edition 'ce' or Enterprise Edition 'ee'         | string | `ce`                                       | no       |
+| docker_gpg_key          | Docker repository GPG key                                                        | string | `9DC858229FC7DD38854AE2D88D81803C0EBFCD88` | no       |
+| docker_instance_name    | Name of the instance                                                             | string | `docker-instance`                          | no       |
+| docker_repository       | Docker repository path                                                           | string | `[docker repository path]`                 | no       |
+| docker_version          | Docker version to install                                                        | string | `18.03.1`                                  | no       |
+| instance_entrypoint     | Entrypoint script to execute                                                     | string |                                            | no       |
+| instance_type           | Instance type                                                                    | string | `t2.medium`                                | no       |
+| key_name                | Name of the key to use. This key has to pre-exist in aws                         | string | -                                          | yes      |
+| operator_group          | Group of the operator account                                                    | string | `operator`                                 | no       |
+| operator_password       | Password of the operator account                                                 | string | -                                          | yes      |
+| operator_user           | User name of the operator account                                                | string | `operator`                                 | no       |
+| secret_key              | The AWS secret key                                                               | string | -                                          | yes      |
+| security_groups         | List of additional security groups that should get attached to the EC2 instances | list   | `<list>`                                   | no       |
+
 
 ## Outputs
 
