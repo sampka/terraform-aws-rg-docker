@@ -28,10 +28,7 @@ output "tags" {
   value       = ["${aws_instance.docker_instance.tags}"]
 }
 
-# debug only
-/*
 output "generated_cloud_config" {
   description = "The generated cloud config"
-  value = "${data.template_file.cloud-config.rendered}"
+  value = "${data.template_file.cloud-init.rendered}"
 }
-*/
