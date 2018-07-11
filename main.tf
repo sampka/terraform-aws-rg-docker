@@ -70,7 +70,7 @@ resource "aws_instance" "docker_instance" {
   ami                    = "${var.ami}"
   instance_type          = "${var.instance_type}"
   key_name               = "${var.key_name}"
-  vpc_security_group_ids = ["${aws_security_group.ssh.id}"]
+  vpc_security_group_ids = ["${var.security_groups}"]
   user_data              = "${data.template_cloudinit_config.config.rendered}"
 
   tags {
