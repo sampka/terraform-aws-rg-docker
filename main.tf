@@ -15,7 +15,7 @@ provider "aws" {
 # Ansible Playbook template
 ############################
 data "template_file" "ansible-playbook" {
-  template = "${file("${path.module}/ansible-playbook.tpl")}"
+  template = "${file("${path.module}/templates/ansible-playbook.tpl")}"
 
   vars {
     docker_channel          = "${var.docker_channel}"
@@ -37,7 +37,7 @@ data "template_file" "ansible-playbook" {
 # Cloud-Init template
 ######################
 data "template_file" "cloud-init" {
-  template = "${file("${path.module}/cloud-init.tpl")}"
+  template = "${file("${path.module}/templates/cloud-init.tpl")}"
 
   vars {
     ansible_playbook_docker = "${base64encode(data.template_file.ansible-playbook.rendered)}"
