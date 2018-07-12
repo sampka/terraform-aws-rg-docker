@@ -29,6 +29,16 @@ output "tags" {
 }
 
 output "generated_cloud_config" {
-  description = "The generated cloud config"
+  description = "The rendered cloudinit config"
+  value = "${data.template_cloudinit_config.config.rendered}"
+}
+
+output "generated_cloud_init_config" {
+  description = "The rendered cloud-init config"
   value = "${data.template_file.cloud-init.rendered}"
+}
+
+output "generated_ansible_playbook" {
+  description = "The rendered ansible playbook"
+  value = "${data.template_file.ansible-playbook.rendered}"
 }
