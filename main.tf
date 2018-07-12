@@ -41,6 +41,7 @@ data "template_file" "cloud-init" {
 
   vars {
     ansible_playbook_docker = "${base64encode(data.template_file.ansible-playbook.rendered)}"
+    instance_entrypoint = "${base64encode(var.instance_entrypoint)}"
   }
 }
 
@@ -54,12 +55,6 @@ data "template_cloudinit_config" "config" {
   part {
     content_type = "text/cloud-config"
     content      = "${data.template_file.cloud-init.rendered}"
-  }
-
-  # user entrypoint script
-  part {
-    content_type = "text/x-shellscript"
-    content      = "${var.instance_entrypoint}"
   }
 }
 

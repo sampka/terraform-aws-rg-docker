@@ -38,7 +38,7 @@ variable "docker_instance_name" {
 
 variable "instance_entrypoint" {
   description = "Entrypoint script to execute"
-  default     = ""
+  default     = "#!/bin/bash"
 }
 
 variable "docker_channel" {
