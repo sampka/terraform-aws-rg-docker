@@ -41,7 +41,7 @@ data "template_file" "cloud-init" {
 
   vars {
     ansible_playbook_docker = "${base64encode(data.template_file.ansible-playbook.rendered)}"
-    instance_entrypoint = "${base64encode(var.instance_entrypoint)}"
+    instance_entrypoint     = "${base64encode(var.instance_entrypoint)}"
   }
 }
 
@@ -67,6 +67,10 @@ resource "aws_instance" "docker_instance" {
   key_name               = "${var.key_name}"
   vpc_security_group_ids = ["${var.security_groups}"]
   user_data              = "${data.template_cloudinit_config.config.rendered}"
+
+  root_block_device {
+    volume_size = 30
+  }
 
   tags {
     Name = "${var.docker_instance_name}"
