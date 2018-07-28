@@ -67,6 +67,8 @@ resource "aws_instance" "docker_instance" {
   key_name               = "${var.key_name}"
   vpc_security_group_ids = ["${var.security_groups}"]
   user_data              = "${data.template_cloudinit_config.config.rendered}"
+  private_ip             = "${var.private_ip}"
+  subnet_id              = "${var.subnet_id}"
 
   root_block_device {
     volume_size = 30

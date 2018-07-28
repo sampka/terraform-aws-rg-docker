@@ -31,6 +31,15 @@ variable "security_groups" {
   default     = []
 }
 
+variable "private_ip" {
+  description = "The private ip address of the ec2 instance"
+  default = "10.0.0.12"
+}
+
+variable "subnet_id" {
+  description = "The assigned subnet to the ec2 instance"
+}
+
 variable "docker_instance_name" {
   description = "Name of the instance"
   default     = "docker-instance"
