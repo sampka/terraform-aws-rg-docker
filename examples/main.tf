@@ -2,6 +2,7 @@ variable "aws_region" {}
 variable "access_key" {}
 variable "secret_key" {}
 variable "key_name" {}
+variable "private_ip" {}
 variable "operator_group" {}
 variable "operator_user" {}
 variable "operator_password" {}
@@ -46,6 +47,66 @@ resource "aws_security_group" "outbound" {
   }
 }
 
+resource "aws_vpc" "default" {
+  cidr_block           = "10.0.0.0/16"
+  enable_dns_hostnames = true
+
+  tags {
+    Name = "rg-example"
+  }
+}
+
+resource "aws_internet_gateway" "gateway" {
+  vpc_id = "${aws_vpc.default.id}"
+
+  tags {
+    Name = "rg-example"
+  }
+}
+
+resource "aws_route_table" "route_table" {
+  vpc_id = "${aws_vpc.default.id}"
+
+  route {
+    cidr_block = "0.0.0.0/0"
+    gateway_id = "${aws_internet_gateway.gateway.id}"
+  }
+
+  tags {
+    Name = "rg-example"
+  }
+}
+
+resource "aws_route_table_association" "route_table_association" {
+  subnet_id      = "${aws_subnet.subnet.id}"
+  route_table_id = "${aws_route_table.route_table.id}"
+}
+
+resource "aws_subnet" "subnet" {
+  vpc_id                  = "${aws_vpc.default.id}"
+  cidr_block              = "10.0.0.0/24"
+  map_public_ip_on_launch = true
+
+  tags {
+    Name = "rg-example"
+  }
+
+  depends_on = ["aws_internet_gateway.gateway"]
+}
+
+resource "aws_eip" "elastic_ip" {
+  vpc = true
+
+  instance                  = "${module.server.id}"
+  associate_with_private_ip = "${var.private_ip}"
+
+  tags {
+    Name = "rg-example"
+  }
+
+  depends_on = ["aws_internet_gateway.gateway"]
+}
+
 module "server" {
   source     = "github.com/ragedunicorn/terraform-aws-rg-docker"
   access_key = "${var.access_key}"
@@ -54,11 +115,14 @@ module "server" {
 
   security_groups = [
     "${aws_security_group.ssh.id}",
-    "${aws_security_group.outbound.id}"
+    "${aws_security_group.outbound.id}",
   ]
 
-  key_name            = "${var.key_name}"
-  operator_user       = "${var.operator_user}"
-  operator_group      = "${var.operator_group}"
-  operator_password   = "${var.operator_password}"
+  docker_instance_name = "${var.docker_instance_name}"
+  private_ip           = "${var.private_ip}"
+  subnet_id            = "${aws_subnet.subnet.id}"
+  key_name             = "${var.key_name}"
+  operator_user        = "${var.operator_user}"
+  operator_group       = "${var.operator_group}"
+  operator_password    = "${var.operator_password}"
 }
