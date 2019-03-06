@@ -21,6 +21,11 @@ variable "instance_type" {
   default     = "t2.medium"
 }
 
+variable "volume_size" {
+  description = "Instance volume size"
+  default     = "30"
+}
+
 variable "key_name" {
   description = "Name of the key to use. This key has to pre-exist in aws"
 }

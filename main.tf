@@ -71,7 +71,7 @@ resource "aws_instance" "docker_instance" {
   subnet_id              = "${var.subnet_id}"
 
   root_block_device {
-    volume_size = 30
+    volume_size = "${var.volume_size}"
   }
 
   tags {
