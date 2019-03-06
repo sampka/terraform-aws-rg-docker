@@ -38,7 +38,7 @@ variable "security_groups" {
 
 variable "private_ip" {
   description = "The private ip address of the ec2 instance"
-  default = "10.0.0.12"
+  default     = "10.0.0.12"
 }
 
 variable "subnet_id" {
