@@ -87,7 +87,7 @@ variable "docker_repository" {
 
 variable "docker_apt_package_name" {
   description = "Full APT docker package name"
-  default     = "{{ docker_version }}~{{ docker_edition }}-0~{{ ansible_distribution | lower }}"
+  default     = "{{ docker_version }}~{{ docker_edition }}~3-0~{{ ansible_distribution | lower }}"
 }
 
 variable "docker_apt_cache_time" {
