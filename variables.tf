@@ -67,12 +67,12 @@ variable "docker_edition" {
 
 variable "docker_version" {
   description = "Docker version to install"
-  default     = "18.03.1"
+  default     = "18.06.3"
 }
 
 variable "docker_compose_version" {
   description = "Docker Compose version to install"
-  default     = "1.21.0"
+  default     = "1.24.0"
 }
 
 variable "docker_gpg_key" {
