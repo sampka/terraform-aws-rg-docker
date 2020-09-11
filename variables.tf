@@ -13,7 +13,7 @@ variable "aws_region" {
 
 variable "ami" {
   description = "Amazon Linux AMI"
-  default     = "ami-c7e0c82c"
+  default     = "ami-0c94855ba95c71c99"
 }
 
 variable "instance_type" {
