@@ -18,7 +18,7 @@ variable "ami" {
 
 variable "instance_type" {
   description = "Instance type"
-  default     = "t2.medium"
+  default     = "t2.small"
 }
 
 variable "volume_size" {
